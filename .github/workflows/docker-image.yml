@@ -26,6 +26,3 @@ jobs:
         dockerfile: react-native/Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
-notifications:
-  email: false
