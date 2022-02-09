@@ -1,0 +1,108 @@
+version: '3.9'
+
+services:
+
+  # Container BackEnd_Dotnet6
+  dotnet6core:
+    # Nome Container
+    container_name: BackEnd_Dotnet6
+
+    # Imagem a ser utilizada pelo Container
+    image: tmc_dotnet6
+    
+    # Politica de RESTART do Container: 5 tentativas
+    restart: on-failure:5
+    
+    # Instrucoes de Build/Construcao de Imagem
+    build:
+      dockerfile: ./dotnet6core/Dockerfile-Dotnet6
+      context: .
+
+    # Variaveis de Ambiente do Container
+    environment:
+      ASPNETCORE_URLS: http://+:80
+      DOTNET_RUNNING_IN_CONTAINER: "true"
+      DOTNET_VERSION: 6.0.0
+      ASPNET_VERSION: 6.0.0
+      Logging__Console__FormatterName: "Json"
+
+    # Publicacao de Portas
+    ports:
+      - "8000:80"
+
+    ### Montagem de Volumes ###
+    volumes:
+      # Volume "/db-tmc" - Banco SQLite
+      - type: bind
+        source: ./db-tmc
+        target: /db-tmc
+
+      # Volume "/dotnet6core" - Arquivos .NET 6
+      - type: bind
+        source: ./dotnet6core
+        target: /dotnet6core
+
+    # Habilita o "shell interativo", evitando que o Container "morra" apos a execucao
+    stdin_open: true
+    tty: true
+
+    # Informa a "rede isolada" e define o Endereco IP a ser utilizado
+    networks:
+      tmc-network:
+        ipv4_address: 10.1.1.20
+
+  # Container Frontend_ReactJS
+  react-native:
+
+    # Informa o nome do Container
+    container_name: Frontend_ReactJS
+
+    # Imagem a ser utilizada pelo Container
+    image: tmc_reactjs
+
+    # Politica de RESTART do Container: 5 tentativas
+    restart: on-failure:5
+
+    # Instrucoes de Build/Construcao de Imagem
+    build:
+      dockerfile: ./react-native/Dockerfile-ReactNative
+      context: .
+
+    # Publicacao de Portas
+    ports:
+      - 19000:19000
+      - 19001:19001
+      - 19002:19002
+      - 3000:3000
+
+    ### Montagem de Volumes ###
+    volumes:
+      # Volume "/db-tmc" - Banco SQLite
+      - type: bind
+        source: ./db-tmc
+        target: /db-tmc
+      # Volume "/react-native" - Arquivos ReactJS
+      - type: bind
+        source: ./build-react-native
+        target: /react-native
+
+    # Habilita o "shell interativo", evitando que o Container "morra" apos a execucao
+    stdin_open: true
+    tty: true
+
+    # Informa a "rede isolada" e define o Endereco IP a ser utilizado
+    networks:
+      tmc-network:
+        ipv4_address: 10.1.1.10
+
+    # Informa que depende da inicializacao do Container DotNet6
+    depends_on:
+      - dotnet6core
+
+# Cria uma "rede isolada" (tmc-network) para os Containers
+networks:
+  tmc-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.1.1.0/8"
