@@ -17,10 +17,16 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file react-native/Dockerfile-ReactNative  --tag tmc_reactjs:$(date +%s)
+    # - uses: actions/checkout@v2
+    # - name: Build the Docker image
+    #   run: docker build . --file react-native/Dockerfile-ReactNative
     
+    - name: Define a variavel DATETIME
+      run: echo "DATETIME=`date +"%Y-%m-%d__%H-%M"`" >> $GITHUB_ENV
+
+    - name: Exibe o valor de DATETIME
+      run: echo ${{ env.DATETIME }}
+
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:
