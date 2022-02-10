@@ -23,6 +23,7 @@ jobs:
       with:
         image: vicente7/tmc
         # tags: tmc_reactjs:$(date +%s)
+        addTimestamp: true
         registry: docker.io
         dockerfile: react-native/Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
