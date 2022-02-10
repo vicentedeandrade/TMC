@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  DATETIME: $(date +"%Y-%m-%d__%H-%M-%S)
+  DATETIME: $(date +"%Y-%m-%d__%H-%M")
 
 jobs:
 
