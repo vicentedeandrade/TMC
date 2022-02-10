@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  DATETIME: $(date +"%Y-%m-%d__%H-%M-%S)
+
 jobs:
 
   build:
@@ -22,8 +25,8 @@ jobs:
       name: Build & push Docker image
       with:
         image: vicente7/tmc
-        # tags: tmc_reactjs:$(date +%s)
-        addTimestamp: true
+        tags: tmc_reactjs:${{ env.DATETIME }}
+        # addTimestamp: true
         registry: docker.io
         dockerfile: react-native/Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
