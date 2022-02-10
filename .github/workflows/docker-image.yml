@@ -21,11 +21,11 @@ jobs:
       run: echo ${{ env.DATETIME }}
 
     - name: Build the Docker image
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       run: docker build . --file Dockerfile-ReactNative
 
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
+    - uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: vicente7/tmc
         tags: tmc_reactjs:${{ env.DATETIME }}
