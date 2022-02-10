@@ -28,7 +28,7 @@ jobs:
       name: Build & push Docker image
       with:
         image: vicente7/tmc
-        # tags: tmc_reactjs:$(date +%s)
+        tags: tmc_reactjs:${{ env.DATETIME }}
         registry: docker.io
         dockerfile: Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
