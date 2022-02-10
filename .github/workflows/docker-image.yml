@@ -15,14 +15,14 @@ jobs:
     steps:
 
     - name: Define a variavel DATETIME
-      run: echo "DATETIME=`date +"%Y%m%d-%H%M%S"`" >> $GITHUB_ENV
+      run: echo "DATETIME=`date +"%Y%m%d_%H%M%S"`" >> $GITHUB_ENV
 
     - name: Exibe o valor de DATETIME
       run: echo ${{ env.DATETIME }}
 
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile-ReactNative  --tag tmc_reactjs:$(date +%s)
+      run: docker build . --file Dockerfile-ReactNative
     
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
