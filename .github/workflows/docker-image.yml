@@ -19,10 +19,6 @@ jobs:
 
     - name: Exibe o valor de DATETIME
       run: echo ${{ env.DATETIME }}
-
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile-ReactNative  --tag tmc_reactjs:$(date +%s)
     
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
