@@ -15,7 +15,7 @@ jobs:
     steps:
 
     - name: Define a variavel DATETIME
-      run: echo "DATETIME=`date +"%y%m%d_%H%M"`" >> $GITHUB_ENV
+      run: echo "DATETIME=`date +"%Y%m%d-%H%M%S"`" >> $GITHUB_ENV
 
     - name: Exibe o valor de DATETIME
       run: echo ${{ env.DATETIME }}
@@ -28,7 +28,7 @@ jobs:
       name: Build & push Docker image
       with:
         image: vicente7/tmc
-        tags: tmc_reactjs:${{ env.DATETIME }}
+        tags: reactjs_${{ env.DATETIME }}
         registry: docker.io
         dockerfile: Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
