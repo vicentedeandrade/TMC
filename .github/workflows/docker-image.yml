@@ -15,7 +15,7 @@ jobs:
     steps:
 
     - name: Define a variavel DATETIME, ajustado para o Timezone do Brasil
-      run: echo "DATETIME=$`date +"%Y-%m-%d_%H-%M-%S" -d '-3 hours'`" >> $GITHUB_ENV
+      run: echo "DATETIME=`date +"%Y-%m-%d_%H-%M-%S" -d '-3 hours'`" >> $GITHUB_ENV
 
     - name: Exibe o valor de DATETIME
       run: echo ${{ env.DATETIME }}
