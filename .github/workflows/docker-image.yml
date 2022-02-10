@@ -31,6 +31,6 @@ jobs:
         tags: tmc_reactjs:${{ env.DATETIME }}
         # addTimestamp: true
         registry: docker.io
-        dockerfile: Dockerfile-ReactNative
+        dockerfile: react-native/Dockerfile-ReactNative
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
