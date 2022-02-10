@@ -25,7 +25,7 @@ jobs:
       run: docker build . --file Dockerfile-ReactNative  --tag tmc_reactjs:$(date +%s)
     
     - uses: mr-smithers-excellent/docker-build-push@v5
-      name: Build & push Docker image
+    - name: Build & push Docker image
       with:
         image: vicente7/tmc
         # tags: tmc_reactjs:$(date +%s)
