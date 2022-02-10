@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-
-    # - uses: actions/checkout@v2
-    # - name: Build the Docker image
-    #   run: docker build . --file react-native/Dockerfile-ReactNative
     
     - name: Define a variavel DATETIME
       run: echo "DATETIME=`date +"%Y%m%d-%H%M"`" >> $GITHUB_ENV
@@ -31,6 +27,6 @@ jobs:
         tags: tmc_reactjs:${{ env.DATETIME }}
         # addTimestamp: true
         registry: docker.io
-        dockerfile: react-native/Dockerfile-ReactNative
+        dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
