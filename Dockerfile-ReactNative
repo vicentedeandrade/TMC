@@ -34,10 +34,7 @@ RUN npm install
 RUN yarn build
 
 # Publica as portas utilizadas pelo App TMC
-EXPOSE 3000
-EXPOSE 19000
-EXPOSE 19001
-EXPOSE 19002
+EXPOSE 3000 19000 19001 19002
 
 # Inicia a publicacao do App na porta 3000
 ENTRYPOINT ["/usr/bin/sh", "-c", "pm2 serve /react-native/build 3000 --spa && /bin/bash"]
